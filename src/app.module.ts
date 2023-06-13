@@ -5,6 +5,7 @@ import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { DataBaseConfigModule } from "./config/database/database.module";
 import { DataBaseConfigService } from "./config/database/database.service";
+import { OrdersModule } from "./orders/orders.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { DataBaseConfigService } from "./config/database/database.service";
       useClass: DataBaseConfigService,
       inject: [DataBaseConfigService],
     }),
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

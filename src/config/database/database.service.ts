@@ -13,11 +13,12 @@ export class DataBaseConfigService implements TypeOrmOptionsFactory {
       username: this.configService.get("DB_USERNAME"),
       password: this.configService.get("DB_PASSWORD"),
       database: this.configService.get("DB_DATABASE"),
-      entities: [__dirname + "/../**/*.entity{.ts,.js}"],
+      entities: [__dirname + "../../../**/*.entity{.ts,.js}"],
 
       // 테스트 환경일 경우에만 dropSchema, synchronize 옵션을 true로 설정
       dropSchema: this.configService.get("NODE_ENV") === "test" ? true : false,
       synchronize: this.configService.get("NODE_ENV") === "test" ? true : false,
+      logging: true,
     };
   }
 }
