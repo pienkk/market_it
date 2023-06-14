@@ -1,7 +1,11 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { OrdersService } from "./orders.service";
-import { RequestOrderStatusChangeDto } from "./dtos/request-orders.dto";
+import {
+  RequestGetOrderDto,
+  RequestOrderStatusChangeDto,
+} from "./dtos/request-orders.dto";
 import { Try, createResponseForm } from "src/types";
+import { OrderEntity } from "./entities/orders.entity";
 
 @Controller("orders")
 export class OrdersController {
@@ -33,5 +37,17 @@ export class OrdersController {
     );
 
     return createResponseForm(message);
+  }
+
+  /**
+   * 단일 주문 조회
+   */
+  @Get(":orderIdx")
+  async getOrder(
+    @Param() requestGetOrderDto: RequestGetOrderDto,
+  ): Promise<Try<OrderEntity>> {
+    const order = await this.orderService.getOrder(requestGetOrderDto);
+
+    return createResponseForm(order);
   }
 }

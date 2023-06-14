@@ -8,3 +8,12 @@ export class RequestOrderStatusChangeDto {
   @IsNotEmpty()
   readonly orderIdx: string;
 }
+
+/**
+ * 단일 주문 조회시 사용하는 DTO
+ */
+export class RequestGetOrderDto {
+  @IsString()
+  @IsNotEmpty()
+  readonly orderIdx: string;
+}
