@@ -1,7 +1,9 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { INestApplication } from "@nestjs/common";
+import { INestApplication, ValidationPipe } from "@nestjs/common";
 import * as request from "supertest";
 import { AppModule } from "./../src/app.module";
+import { HttpAdapterHost } from "@nestjs/core";
+import { GlobalExceptionFilter } from "src/util/exception/exception.filter";
 
 describe("AppController (e2e)", () => {
   let app: INestApplication;
@@ -12,6 +14,15 @@ describe("AppController (e2e)", () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      }),
+    );
+
+    const httpAdapterHost = app.get(HttpAdapterHost);
+    app.useGlobalFilters(new GlobalExceptionFilter(httpAdapterHost));
     await app.init();
   });
 
