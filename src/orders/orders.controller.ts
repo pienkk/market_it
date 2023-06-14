@@ -20,4 +20,18 @@ export class OrdersController {
 
     return createResponseForm(message);
   }
+
+  /**
+   * 주문 완료 처리
+   */
+  @Post("complete")
+  async completeOrder(
+    @Body() requestOrderStatusChangeDto: RequestOrderStatusChangeDto,
+  ): Promise<Try<string>> {
+    const message = await this.orderService.completeOrder(
+      requestOrderStatusChangeDto,
+    );
+
+    return createResponseForm(message);
+  }
 }
