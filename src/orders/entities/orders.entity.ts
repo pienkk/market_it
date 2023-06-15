@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { OrderStatusType } from "../types/orders.type";
+import { OrderStatusEnum, OrderStatusType } from "../types/orders.type";
 import { UserEntity } from "src/users/entities/users.entity";
 import { ProductEntity } from "./products.entity";
 
@@ -32,12 +32,7 @@ export class OrderEntity extends TimeAbs {
 
   @Column({
     type: "enum",
-    enum: [
-      "ORDER_PENDING",
-      "ORDER_ACCEPTED",
-      "ORDER_COMPLETED",
-      "ORDER_CANCELED",
-    ],
+    enum: OrderStatusEnum,
     comment:
       "주문 상태 / ORDER_PENDING: 주문 대기, ORDER_ACCEPTED: 주문 접수, ORDER_COMPLETED: 주문 완료, ORDER_CANCELED: 주문 취소",
   })

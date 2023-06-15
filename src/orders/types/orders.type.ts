@@ -6,8 +6,12 @@
  * ORDER_COMPLETED: 주문 완료
  * ORDER_CANCELED: 주문 취소
  */
-export type OrderStatusType =
-  | "ORDER_PENDING"
-  | "ORDER_ACCEPTED"
-  | "ORDER_COMPLETED"
-  | "ORDER_CANCELED";
+export enum OrderStatusEnum {
+  ORDER_PENDING = "ORDER_PENDING",
+  ORDER_ACCEPTED = "ORDER_ACCEPTED",
+  ORDER_COMPLETED = "ORDER_COMPLETED",
+  ORDER_CANCELED = "ORDER_CANCELED",
+}
+
+// enum type 변환
+export type OrderStatusType = keyof typeof OrderStatusEnum;

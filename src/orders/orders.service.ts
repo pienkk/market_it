@@ -6,6 +6,11 @@ import {
   RequestGetOrderDto,
   RequestOrderStatusChangeDto,
 } from "./dtos/request-orders.dto";
+import {
+  ResponseOrderDetailDto,
+  ResponseOrdersPageNationDto,
+} from "./dtos/response-orders.dto";
+import { PageNationDto } from "../common/dtos/common.dto";
 
 @Injectable()
 export class OrdersService {
@@ -97,7 +102,9 @@ export class OrdersService {
   /**
    * 단일 주문 조회
    */
-  async getOrder(requestGetOrderDto: RequestGetOrderDto): Promise<OrderEntity> {
+  async getOrder(
+    requestGetOrderDto: RequestGetOrderDto,
+  ): Promise<ResponseOrderDetailDto> {
     const order = await this.orderRepository.findOne({
       select: {
         orderIdx: true,
@@ -131,5 +138,39 @@ export class OrdersService {
     }
 
     return order;
+  }
+
+  /**
+   * 주문 목록 조회 (페이지네이션)
+   */
+  async getOrdersPageNation(
+    pageNationDto: PageNationDto,
+  ): Promise<ResponseOrdersPageNationDto> {
+    const { page, limit } = pageNationDto;
+
+    const [orders, total] = await this.orderRepository.findAndCount({
+      select: {
+        orderIdx: true,
+        quantity: true,
+        price: true,
+        status: true,
+        createdAt: true,
+        user: {
+          name: true,
+        },
+        product: {
+          productIdx: true,
+          name: true,
+          description: true,
+          price: true,
+        },
+      },
+      relations: { user: true, product: true },
+      order: { createdAt: "DESC" },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    return { orders, total };
   }
 }

@@ -9,6 +9,7 @@ import {
 } from "./dtos/request-orders.dto";
 import { UserEntity } from "src/users/entities/users.entity";
 import { ProductEntity } from "./entities/products.entity";
+import { PageNationDto } from "src/common/dtos/common.dto";
 
 describe("OrdersService", () => {
   let orderService: OrdersService;
@@ -222,6 +223,99 @@ describe("OrdersService", () => {
       } catch (error) {
         expect(error.message).toBe("해당 주문이 존재하지 않습니다.");
       }
+    });
+  });
+
+  describe("getOrdersPageNation() 주문 목록 조회", () => {
+    const pageNationDto: PageNationDto = {
+      page: 1,
+      limit: 10,
+    };
+
+    // 성공
+    it("주문 목록과 조건에 맞는 주문 갯수를 반환한다.", async () => {
+      const user = new UserEntity();
+      const existingUser: Partial<UserEntity> = {
+        name: "장기석",
+      };
+      Object.assign(user, existingUser);
+      const product = new ProductEntity();
+      const existingProduct: Partial<ProductEntity> = {
+        productIdx: "31a898d5-34cb-439e-a4a1-6d8e93e69b70",
+        name: "아메리카노",
+        description: "깊고 진한 맛",
+        price: 50000,
+      };
+      Object.assign(product, existingProduct);
+      const firstOrder = new OrderEntity();
+      const existingOrder: Partial<OrderEntity> = {
+        orderIdx: "02bb5488-8174-4472-9dab-c8c1f46a9050",
+        quantity: 1,
+        price: 50000,
+        status: "ORDER_ACCEPTED",
+        createdAt: new Date("2023-06-15"),
+        user: user,
+        product: product,
+      };
+      Object.assign(firstOrder, existingOrder);
+      const secondOrder = new OrderEntity();
+      const existingSecondOrder: Partial<OrderEntity> = {
+        orderIdx: "02bb5488-8174-4472-9dab-c8c1f46a9055",
+        quantity: 1,
+        price: 50000,
+        status: "ORDER_ACCEPTED",
+        createdAt: new Date("2023-06-15"),
+        user: user,
+        product: product,
+      };
+      Object.assign(secondOrder, existingSecondOrder);
+
+      const orderList = [firstOrder, secondOrder];
+      const orderCount = 2;
+
+      jest
+        .spyOn(orderRepository, "findAndCount")
+        .mockResolvedValue([orderList, orderCount]);
+
+      const result = await orderService.getOrdersPageNation(pageNationDto);
+
+      expect(result).toEqual({
+        orders: [
+          {
+            orderIdx: "02bb5488-8174-4472-9dab-c8c1f46a9050",
+            quantity: 1,
+            price: 50000,
+            status: "ORDER_ACCEPTED",
+            createdAt: new Date("2023-06-15"),
+            user: {
+              name: "장기석",
+            },
+            product: {
+              productIdx: "31a898d5-34cb-439e-a4a1-6d8e93e69b70",
+              name: "아메리카노",
+              description: "깊고 진한 맛",
+              price: 50000,
+            },
+          },
+          {
+            orderIdx: "02bb5488-8174-4472-9dab-c8c1f46a9055",
+            quantity: 1,
+            price: 50000,
+            status: "ORDER_ACCEPTED",
+            createdAt: new Date("2023-06-15"),
+            user: {
+              name: "장기석",
+            },
+            product: {
+              productIdx: "31a898d5-34cb-439e-a4a1-6d8e93e69b70",
+              name: "아메리카노",
+              description: "깊고 진한 맛",
+              price: 50000,
+            },
+          },
+        ],
+        total: 2,
+      });
     });
   });
 });

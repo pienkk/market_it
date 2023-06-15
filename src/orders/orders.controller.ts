@@ -1,11 +1,15 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { OrdersService } from "./orders.service";
 import {
   RequestGetOrderDto,
   RequestOrderStatusChangeDto,
 } from "./dtos/request-orders.dto";
 import { Try, createResponseForm } from "src/types";
-import { OrderEntity } from "./entities/orders.entity";
+import {
+  ResponseOrderDetailDto,
+  ResponseOrdersPageNationDto,
+} from "./dtos/response-orders.dto";
+import { PageNationDto } from "src/common/dtos/common.dto";
 
 @Controller("orders")
 export class OrdersController {
@@ -45,9 +49,21 @@ export class OrdersController {
   @Get(":orderIdx")
   async getOrder(
     @Param() requestGetOrderDto: RequestGetOrderDto,
-  ): Promise<Try<OrderEntity>> {
+  ): Promise<Try<ResponseOrderDetailDto>> {
     const order = await this.orderService.getOrder(requestGetOrderDto);
 
     return createResponseForm(order);
+  }
+
+  /**
+   * 주문 목록 조회 (페이지네이션)
+   */
+  @Get()
+  async getOrdersPageNation(
+    @Query() pageNationDto: PageNationDto,
+  ): Promise<Try<ResponseOrdersPageNationDto>> {
+    const orders = await this.orderService.getOrdersPageNation(pageNationDto);
+
+    return createResponseForm(orders);
   }
 }

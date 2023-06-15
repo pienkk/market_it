@@ -14,6 +14,9 @@ async function bootstrap() {
       // DTO에 정의되지 않은 속성이 들어오면 에러
       whitelist: true,
       forbidNonWhitelisted: true,
+      // DTO에 정의된 타입으로 자동 변환
+      transform: true,
+      transformOptions: { enableImplicitConversion: true },
     }),
   );
 
