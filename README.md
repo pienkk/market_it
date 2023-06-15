@@ -1,73 +1,65 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## 마켓잇 API 과제
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+### 사용기술
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- TypeScript
+- Nest.js
+- PostgreSQL
+- TypeORM
 
-## Description
+### 작업 내용
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- User, Product, Order 3개의 관계 테이블 생성
+- 주문관리 API 개발
+- 유닛테스트
+- Postman API Document 첨부
 
-## Installation
+### API
+
+- 주문 접수처리
+- 주문 완료처리
+- 단일 주문조회
+- 주문 목록조회
+
+### 실행 방법
+
+1. 저장소를 클론 받고 .env.sample 파일을 참조하여 환경에 맞는 .env 파일작성
+
+```bash
+$ git clone https://github.com/pienkk/market_it.git
+```
+
+2. RDS에 .env에 작성한 DB가 없을시 생성 mysql을 사용했을 경우 `src > config > database > database.service.ts`에서 type을 'mysql'로 변경
+
+3. 패키지 설치
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+4. 서버 실행
 
 ```bash
-# development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
+#### 테스트 실행
 
 ```bash
-# unit tests
 $ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### 테스트
 
-## Stay in touch
+유닛테스트 완료
+<img width="366" alt="KakaoTalk_Photo_2023-06-15-14-55-47" src="https://github.com/pienkk/market_it/assets/104005339/93937757-94a5-41a9-a54c-132777e1a000">
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
 
-## License
+### API Document
 
-Nest is [MIT licensed](LICENSE).
+1. Postman 다운로드 및 접속 (https://www.postman.com)
+
+2. WorkSpace 생성
+
+3. 좌측 상단 import 클릭 후 마켓잇 테스트 postman 파일 붙여넣기
