@@ -1,0 +1,766 @@
+{
+	"info": {
+		"_postman_id": "ab9e3805-edad-4ebe-9ef9-1b93649906fa",
+		"name": "마켓잇 테스트 v0.0.1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23349652",
+		"_collection_link": "https://lunar-shuttle-397249.postman.co/workspace/cryptoBy~ea86c3c8-1695-4cf2-b533-666330f6cb92/collection/23349652-ab9e3805-edad-4ebe-9ef9-1b93649906fa?action=share&creator=23349652&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "A. 주문관리 v0.0.1",
+			"item": [
+				{
+					"name": "A-1. 주문 접수 처리 v0.0.1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderIdx\":\"0646ebe1-4e17-49ca-b871-99770050a9d2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/orders/accept",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"orders",
+								"accept"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "성공 v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"0646ebe1-4e17-49ca-b871-99770050a9d1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/accept",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"accept"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-tHTYKIqI4XOomDCUuVqWjlZ3b9Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 13:49:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"data\": \"주문 접수 처리 완료\"\n}"
+						},
+						{
+							"name": "실패 (orderIdx 누락) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/orders/accept",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"accept"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c0-kbSFAqPndfv5hsrUThEIty4hfMs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 13:46:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"BadRequestException\",\n        \"code\": null,\n        \"message\": [\n            \"orderIdx should not be empty\",\n            \"orderIdx must be a string\"\n        ],\n        \"timeStamp\": \"2023-06-14T13:46:45.937Z\"\n    }\n}"
+						},
+						{
+							"name": "실패 (주문 대기 상태가 아님) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"0646ebe1-4e17-49ca-b871-99770050a9d1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/accept",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"accept"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "191"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bf-Vlx+bKmHQyK5PccH0XYOGFwpen4\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 13:50:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"HttpException\",\n        \"code\": \"1001\",\n        \"message\": \"주문 대기 상태의 주문만 접수할 수 있습니다.\",\n        \"timeStamp\": \"2023-06-14T13:50:02.124Z\"\n    }\n}"
+						},
+						{
+							"name": "실패 (존재하지 않는주문) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"0646ebe1-4e17-49ca-b871-99770050a9d2\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/accept",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"accept"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-qSx0gocSEwsqi2SouJkAFrkIxd0\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 13:50:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"HttpException\",\n        \"code\": \"1000\",\n        \"message\": \"해당 주문이 존재하지 않습니다.\",\n        \"timeStamp\": \"2023-06-14T13:50:26.852Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "A-2. 주문 완료 처리 v0.0.1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderIdx\":\"7b86171c-a8ec-4e52-b2fb-7c037432b5d1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/orders/complete",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"orders",
+								"complete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "성공 v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"7b86171c-a8ec-4e52-b2fb-7c037432b5df\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/complete",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"complete"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-X/pJhljLnHMYdVoy1ubB7upWFQY\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 14:49:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"data\": \"주문 완료 처리 완료\"\n}"
+						},
+						{
+							"name": "실패 (주문 접수 상태 아님) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"7b86171c-a8ec-4e52-b2fb-7c037432b5df\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/complete",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"complete"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "191"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bf-otdqvbtTR8XncEZVW5SHcMaHZZs\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 14:50:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"HttpException\",\n        \"code\": \"1002\",\n        \"message\": \"주문 접수 상태의 주문만 완료할 수 있습니다.\",\n        \"timeStamp\": \"2023-06-14T14:50:03.968Z\"\n    }\n}"
+						},
+						{
+							"name": "실패 (orderIdx 누락) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/orders/complete",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"complete"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c0-0fRkfF6GGAFiFhfpxg6wlRffuZk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 14:46:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"BadRequestException\",\n        \"code\": null,\n        \"message\": [\n            \"orderIdx should not be empty\",\n            \"orderIdx must be a string\"\n        ],\n        \"timeStamp\": \"2023-06-14T14:46:31.251Z\"\n    }\n}"
+						},
+						{
+							"name": "실패 (존재하지 않는 주문) v0.0.1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderIdx\":\"7b86171c-a8ec-4e52-b2fb-7c037432b5d1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{localhost}}/orders/complete",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										"complete"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-aKkXhdmYA4DHd+PMlnoiO9a6/98\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 14:50:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"HttpException\",\n        \"code\": \"1000\",\n        \"message\": \"해당 주문이 존재하지 않습니다.\",\n        \"timeStamp\": \"2023-06-14T14:50:28.400Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "A-3. 단일 주문 조회 v0.0.1",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "성공 v0.0.1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/orders/:orderIdx",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										":orderIdx"
+									],
+									"variable": [
+										{
+											"key": "orderIdx",
+											"value": "7b86171c-a8ec-4e52-b2fb-7c037432b5df"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"145-oNzSAGIqFZNHBRIi2Bzx2xPuE9o\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 23:25:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"data\": {\n        \"createdAt\": \"2023-06-14T05:49:41.452Z\",\n        \"orderIdx\": \"7b86171c-a8ec-4e52-b2fb-7c037432b5df\",\n        \"quantity\": 1,\n        \"price\": 30000,\n        \"status\": \"ORDER_COMPLETED\",\n        \"user\": {\n            \"name\": \"장기석\"\n        },\n        \"product\": {\n            \"productIdx\": \"ba2ca3d5-31b7-4d33-bb9a-da689406d8fa\",\n            \"name\": \"의자\",\n            \"description\": \"빛나는 의자\",\n            \"price\": 30000\n        }\n    }\n}"
+						},
+						{
+							"name": "실패 (존재하지 않는 주문) v0.0.1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/orders/:orderIdx",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders",
+										":orderIdx"
+									],
+									"variable": [
+										{
+											"key": "orderIdx",
+											"value": "7b86171c-a8ec-4e52-b2fb-7c037432b5d2"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "173"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ad-3a0su73I3KlgAVA5PNOOwlE9fYk\""
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 14 Jun 2023 23:25:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": false,\n    \"data\": null,\n    \"error\": {\n        \"name\": \"HttpException\",\n        \"code\": \"1000\",\n        \"message\": \"해당 주문이 존재하지 않습니다.\",\n        \"timeStamp\": \"2023-06-14T23:25:48.047Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "A-4. 주문 리스트 조회 v0.0.1",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "성공 v0.0.1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{localhost}}/orders?page=1&limit=10",
+									"host": [
+										"{{localhost}}"
+									],
+									"path": [
+										"orders"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"description": "검색할 페이지(option) default = 1"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"description": "페이지당 보여줄 갯수(option) default = 10"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "654"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28e-PUueJ43Tb+7V9bdSO1U+WOALuNQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 Jun 2023 04:47:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isSuccess\": true,\n    \"data\": {\n        \"orders\": [\n            {\n                \"createdAt\": \"2023-06-14T19:47:27.861Z\",\n                \"orderIdx\": \"f6324000-34b1-4d6d-aeca-f8ac766fcbf3\",\n                \"quantity\": 2,\n                \"price\": 60000,\n                \"status\": \"ORDER_ACCEPTED\",\n                \"user\": {\n                    \"name\": \"장기석\"\n                },\n                \"product\": {\n                    \"productIdx\": \"02bb5488-8174-4472-9dab-c8c1f46a9050\",\n                    \"name\": \"빨간 의자\",\n                    \"description\": \"붉은색 의자\",\n                    \"price\": 30000\n                }\n            },\n            {\n                \"createdAt\": \"2023-06-14T05:49:41.452Z\",\n                \"orderIdx\": \"7b86171c-a8ec-4e52-b2fb-7c037432b5df\",\n                \"quantity\": 1,\n                \"price\": 30000,\n                \"status\": \"ORDER_COMPLETED\",\n                \"user\": {\n                    \"name\": \"장기석\"\n                },\n                \"product\": {\n                    \"productIdx\": \"ba2ca3d5-31b7-4d33-bb9a-da689406d8fa\",\n                    \"name\": \"의자\",\n                    \"description\": \"빛나는 의자\",\n                    \"price\": 30000\n                }\n            }\n        ],\n        \"total\": 2\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localhost",
+			"value": "127.0.0.1:3000",
+			"type": "string"
+		}
+	]
+}
